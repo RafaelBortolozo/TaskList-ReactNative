@@ -1,10 +1,26 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, Button, FlatList, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
+//import { TextInput } from "react-native-gesture-handler";
+import { TextInput } from "react-native-paper"
 import TaskItem from "../components/TaskItem";
 
 const TaskScreen = () => {
     
     let [tarefas, setTarefas]= useState([])
+    let [description, setDescription]= useState('')
+
+    const newTask= () => {
+        let id= Math.random()
+        let date = new Date()
+    
+        let day= date.getDay()
+        let month= date.getMonth()
+        let year= date.getFullYear()
+        
+        setDescription('')
+
+        return {id: `${id}` , description: description, date: `${day}/${month}/${year}`}
+    }
 
     const removeTask= (id) => {
         let filteredList= tarefas.filter((task) => task.id != id)
@@ -13,10 +29,17 @@ const TaskScreen = () => {
 
     return (
         <View>
+            <TextInput 
+                placeholder="Descrição da tarefa"
+                value={description}
+                onChangeText={newValue => setDescription(newValue)}
+            
+            />
+
             <TouchableOpacity style={styles.taskBtn} onPress={() => {
                 setTarefas([...tarefas, newTask()])
             }}>
-                <Text>Gerar tarefa</Text>
+                <Text>Cadastrar tarefa</Text>
             </TouchableOpacity>
             <FlatList style={styles.tasksList}
                 data={tarefas}     
@@ -27,17 +50,6 @@ const TaskScreen = () => {
             />
         </View>
   )
-}
-
-const newTask= () => {
-    let id= Math.random()
-    let date = new Date()
-
-    let day= date.getDay()
-    let month= date.getMonth()
-    let year= date.getFullYear()
-
-    return {id: `${id}` , description: `Tarefa #${id}`, date: `${day}/${month}/${year}`}
 }
 
 const styles = StyleSheet.create({

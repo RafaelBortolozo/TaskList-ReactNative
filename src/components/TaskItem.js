@@ -1,15 +1,17 @@
 import React from "react";
-import { Text, StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const TaskItem = (props) => {
 
   return (
     <View style={styles.container}>
-        <Image source={require('../../assets/task.png')} style={styles.imageColumn}/>
+        <FontAwesome style={styles.imageColumn} name="tasks" size={20} color="black" />
         <Text style={styles.descriptionColumn}>{props.task.description}</Text>
         <Text style={styles.dateColumn}>{props.task.date}</Text>
         <TouchableOpacity style={styles.removeColumn} onPress={() => props.removeTask(props.task.id)}>
-            <Text style={{color: '#FFFFFF'}}>X</Text>
+            <AntDesign name="closesquare" size={20} color="red" />
         </TouchableOpacity>
     </View>
   )
@@ -21,11 +23,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'flex-start',
-        marginTop: 20
+        marginTop: 20,
+        marginLeft: '2%',
+        marginRight: '2%'
     },
     imageColumn: {
-        width: '10%',
-        resizeMode: 'contain'
+        width: '10%'
     },
     descriptionColumn: {
         width: '60%'
@@ -35,7 +38,6 @@ const styles = StyleSheet.create({
     },
     removeColumn: {
         width: '5%',
-        backgroundColor: 'red',
         alignItems: 'center'
     }
 })
