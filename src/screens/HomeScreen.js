@@ -1,42 +1,42 @@
 import React from "react";
-import { Text, StyleSheet, View, Button, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, View} from "react-native";
+import { Button } from "react-native-paper"
 
 const HomeScreen = (props) => {
   return (
-    <View style= {{alignItems: 'center'}}>
-      <Text style= {styles.estilo1}>Olá mundo</Text>
-      <Text style= {styles.estilo2}>Olá mundo2</Text>
+    <View style= {styles.container}>
+      <Text style= {styles.title}>App React Native</Text>
       
       <View style={{marginBottom: 10}}>
-        <Button 
-          title='Tasks'
-          onPress={() => props.navigation.navigate('Task')}
-        />
+        <Button style={styles.button} mode='contained' onPress={() => props.navigation.navigate('Task')}>
+          Tasks
+        </Button>
       </View>
 
-      <Button 
-        title='Counter'
-        onPress={() => props.navigation.navigate('Counter')}
-      />
+      <Button style={styles.button} mode='contained' onPress={() => props.navigation.navigate('Counter')}>
+          Counter
+      </Button>
       
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  estilo1: {
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    backgroundColor: '#d1d8e0'
+  },
+  title: {
     fontSize: 30,
     marginTop: 50, 
-    backgroundColor: '#DDDDDD',
+    marginBottom: 50,
     borderRadius: 10,
     padding: 7
   },
-
-  estilo2: {
-    marginTop: 50,
-    color: '#0000FF',
-    marginBottom: 20
-  }
+  button: {
+    backgroundColor: '#8854d0'
+  },
 })
 
 export default HomeScreen

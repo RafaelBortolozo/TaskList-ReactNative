@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, SafeAreaView  } from "react-native";
-import { TextInput, Button, List } from "react-native-paper"
+import { Text, StyleSheet, FlatList, SafeAreaView, View } from "react-native";
+import { TextInput, Button} from "react-native-paper"
 import TaskItem from "../components/TaskItem";
 
 const TaskScreen = () => {
@@ -28,37 +28,42 @@ const TaskScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <TextInput 
-                style={styles.descriptionInput}
-                placeholder="Descrição da tarefa"
-                value={description}
-                onChangeText={newValue => setDescription(newValue)}
-            
-            />
-
-            <Button style={styles.taskBtn} mode='contained' onPress={() => {
-                setTarefas([...tarefas, newTask()])
-            }}>
-                <Text>Cadastrar tarefa</Text>
-            </Button>
-
-            <FlatList style={styles.tasksList}
-                data={tarefas}     
-                keyExtractor={(task) => task.id}
-                renderItem={(element) => {
-                    return <TaskItem task={element.item} removeTask={removeTask}/>
-                }}
-            />
+            <View style={styles.view}>
+                <TextInput 
+                    style={styles.descriptionInput}
+                    placeholder="Descrição da tarefa"
+                    value={description}
+                    onChangeText={newValue => setDescription(newValue)}
                 
+                />
+
+                <Button style={styles.taskBtn} mode='contained' onPress={() => {
+                    setTarefas([...tarefas, newTask()])
+                }}>
+                    <Text>Cadastrar tarefa</Text>
+                </Button>
+
+                <FlatList style={styles.tasksList}
+                    data={tarefas}     
+                    keyExtractor={(task) => task.id}
+                    renderItem={(element) => {
+                        return <TaskItem task={element.item} removeTask={removeTask}/>
+                    }}
+                />
+            </View> 
         </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
     container:{
+        backgroundColor: '#d1d8e0',
+        flex: 1
+    },
+    view: {
         width: '96%',
         marginLeft: '2%',
-        marginRight: '2%'
+        marginRight: '2%',
     },
     descriptionInput:{
         marginTop: 15
@@ -67,7 +72,8 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     taskBtn: {
-        marginTop: 10
+        marginTop: 10,
+        backgroundColor: '#8854d0'
     }
     
 })
