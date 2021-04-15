@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Text, StyleSheet, View, FlatList, TouchableOpacity } from "react-native";
-//import { TextInput } from "react-native-gesture-handler";
-import { TextInput } from "react-native-paper"
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, SafeAreaView  } from "react-native";
+import { TextInput, Button, List } from "react-native-paper"
 import TaskItem from "../components/TaskItem";
 
 const TaskScreen = () => {
@@ -28,19 +27,21 @@ const TaskScreen = () => {
     }
 
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
             <TextInput 
+                style={styles.descriptionInput}
                 placeholder="Descrição da tarefa"
                 value={description}
                 onChangeText={newValue => setDescription(newValue)}
             
             />
 
-            <TouchableOpacity style={styles.taskBtn} onPress={() => {
+            <Button style={styles.taskBtn} mode='contained' onPress={() => {
                 setTarefas([...tarefas, newTask()])
             }}>
                 <Text>Cadastrar tarefa</Text>
-            </TouchableOpacity>
+            </Button>
+
             <FlatList style={styles.tasksList}
                 data={tarefas}     
                 keyExtractor={(task) => task.id}
@@ -48,19 +49,25 @@ const TaskScreen = () => {
                     return <TaskItem task={element.item} removeTask={removeTask}/>
                 }}
             />
-        </View>
+                
+        </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+    container:{
+        width: '96%',
+        marginLeft: '2%',
+        marginRight: '2%'
+    },
+    descriptionInput:{
+        marginTop: 15
+    },
     tasksList: {
         marginTop: 20
     },
     taskBtn: {
-        margin: 10,
-        alignItems: "center",
-        backgroundColor: "#DDDDDD",
-        padding: 10
+        marginTop: 10
     }
     
 })
